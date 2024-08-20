@@ -1,18 +1,20 @@
-export async function makeApiRequest() {
-    const response = await fetch('/api/request', {
-        method: 'POST',
+async function makeApiRequest() {
+    const response = await fetch("https://goprogram.onrender.com/api/request", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
+            "Authorization": "Bearer your-token"
         },
         body: JSON.stringify({
-            // Any data you need to send to the backend
-        }),
+            // Include any data you need to send to the backend
+        })
     });
 
     if (!response.ok) {
-        throw new Error('Failed to fetch data');
+        console.error("Failed to make API request");
+        return;
     }
 
     const data = await response.json();
-    return data;
+    console.log("Response data:", data);
 }
